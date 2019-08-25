@@ -1,0 +1,165 @@
+﻿<div class="container-fluid">
+    <div class="row">
+
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="margin-top: 56px;">
+            <div class="sidebar-sticky">
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Пользователи</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/AddUser">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Создать нового пользователя
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/ChangeOrDeleteUser">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Изменить/Удалить зарегистрированного пользователя
+                        </a>
+                    </li>
+
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Игры</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/AddGame">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Добавить игру в магазин
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/ChangeOrDeleteGame">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Удалить/Изменить игру в магазине
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <form action="AddUser" method="post" class="d-flex justify-content-sm-center" style="margin: 17%;">
+                <div class="d-flex justify-content-lg-center" style="width: 100%">
+                    <div style="width: 100%">
+                        <h4 class="mb-3" align="center">Добавление нового пользователя</h4>
+
+                        <div class="mb-3">
+                            <label for="Login">Имя пользователя</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="text" class="form-control" id="Login" name="Login" placeholder="Никнейм(будет использоватся для входа в аккаунт)" required="">
+                                <div class="invalid-feedback" style="width: 100%;">
+                                    Это поле обязательно для заполнения.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Email">Электронная почта</label>
+                            <input type="email" class="form-control" id="Email" name="Email" placeholder="you@example.com">
+                            <div class="invalid-feedback">
+                                Пожалуйста введите корректный электронный адрес.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Password">Пароль</label>
+                            <input type="text" class="form-control" id="Password" name="Password" placeholder="" required="">
+                            <div class="invalid-feedback">
+                                Это поле обязательно для заполнения.
+                            </div>
+                        </div>
+
+                        <script>
+                            function ChangeState() {
+                                var checkbox = document.getElementById('IsAdmin');
+                                if (checkbox.checked) {
+                                    checkbox.value = true;
+                                } else {
+                                    checkbox.value = false;
+                                }
+                            }
+                        </script>
+
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="IsAdmin" name="IsAdmin" value="false" onclick="ChangeState()">
+                            <label class="custom-control-label" for="IsAdmin">Выдать привелегии администратора</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Image">Текущее изображение профиля</label>
+                        </div>
+
+                        <div class="mb-3">
+                            <img id="Image" name="Image" src="/Content/Avatars/Default.png" alt="" style="height: 30%; width: 30%;"/>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="file" id="imgInput" name="imgInput"/>
+                            <input type="text" id="ImagePath" name="ImagePath" value="" style="display: none;"/>
+                        </div>
+
+                        <script>
+                            function readURL(input) {
+
+                                if (input.files && input.files[0]) {
+                                    var reader = new FileReader();
+
+                                    reader.onload = function(e) {
+                                        $('#Image').attr('src', e.target.result);
+                                        $('#ImagePath').attr('value', e.target.result);
+                                    };
+
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            }
+
+                            $("#imgInput").change(function() {
+                                readURL(this);
+                            });
+                        </script>
+
+                        <hr class="mb-4">
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">Добавить</button>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>

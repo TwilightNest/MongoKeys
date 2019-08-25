@@ -1,0 +1,76 @@
+﻿@using MongoKeys.Models
+@using (var context = new ApplicationContext())
+{
+    int id = ViewBag._Id;
+    var game = context.Games.FirstOrDefault(g => g._Id == id);
+    var user = context.Users.FirstOrDefault(u => u._Login == User.Identity.Name);
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+    <div class="jumbotron" style="padding-bottom: 10px;">
+        <div class="container">
+            <h1 class="display-3" style="display: inline-block;">@game._Name</h1>
+            @{
+                var path = "/Content/Images/" + game._Id + ".png";
+                <img src="@path" class="rounded float-right" style="height: 40%; width: 40%;">
+            }
+            <p>
+                На этой странице вы можете просмотреть всю информацию о покупаемой игре.
+            </p>
+            @if (user != null && user._Games.Contains(game))
+            {
+                <p>
+                    <a class="btn btn-primary btn-lg" href="/User/PlayGame/?steamId=@game._SteamId" role="button">Играть!</a>
+                </p>
+            }
+            else
+            {
+                <p>
+                    <a class="btn btn-primary btn-lg" href="/Home/BuyGame/@game._Id" role="button">Купить эту игру!</a>
+                </p>
+            }
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Жанр</h2>
+                    <p>@game._Genre</p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Дата выхода</h2>
+                    <p>@game._DateOfRelease.Day.@game._DateOfRelease.Month.@game._DateOfRelease.Year</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="col">
+            <div class="row-md-4">
+                <h2 style="text-align: center">Описание</h2>
+                <p>@game._FullDescription</p>
+            </div>
+            <div class="row-md-4">
+                <h2 style="text-align: center">Обзор</h2>
+                <iframe width="100%" height="600px;" src="@game._Review" frameborder="1" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+            <div class="row-md-4">
+                <h2 style="text-align: center">Пользователи, которые приобрели данную игру</h2>
+                @if (game._Users.Count > 0)
+                {
+                    foreach (var FUser in game._Users)
+                    {
+                        <a href="/User/Index/@FUser._Id">
+                            <ins>@FUser._Login</ins>
+                        </a>
+                    }
+                }
+                else
+                {
+                    <p>К сожалению данную игру пока что никто не приобрёл(</p>
+                }
+            </div>
+        </div>
+        <hr>
+    </div>
+    <!-- /container -->
+}

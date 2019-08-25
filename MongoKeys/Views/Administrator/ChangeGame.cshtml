@@ -1,0 +1,220 @@
+﻿@using MongoKeys.Models
+<div class="container-fluid">
+    <div class="row">
+
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar" style="margin-top: 56px;">
+            <div class="sidebar-sticky">
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Пользователи</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/AddUser">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Создать нового пользователя
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/ChangeOrDeleteUser">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Изменить/Удалить зарегистрированного пользователя
+                        </a>
+                    </li>
+
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Игры</span>
+                </h6>
+                <ul class="nav flex-column mb-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/AddGame">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Добавить игру в магазин
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Administrator/ChangeOrDeleteGame">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14 2 14 8 20 8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Удалить/Изменить игру в магазине
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+        @using (var context = new ApplicationContext())
+        {
+            int _Id = ViewBag._Id;
+            var game = context.Games.FirstOrDefault(g => g._Id == _Id);
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <form action="ChangeGame" method="post" class="d-flex justify-content-sm-center" style="margin: 10%;">
+                    <div class="d-flex justify-content-lg-center" style="width: 100%">
+                        <div style="width: 100%">
+                            <h4 class="mb-3" align="center">Изменение игры @game._Name</h4>
+
+                            <input id="Id" name="Id" value="@game._Id" style="display: none">
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="Name">Название игры</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                            </div>
+                                            <input type="text" class="form-control" id="Name" name="Name" placeholder="" required="" value="@game._Name">
+                                            <div class="invalid-feedback" style="width: 100%;">
+                                                Это поле обязательно для заполнения.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="SteamId">SteamId</label>
+                                        <input type="text" class="form-control" id="SteamId" name="SteamId" placeholder="you@example.com" value="@game._SteamId">
+                                        <div class="invalid-feedback">
+                                            Пожалуйста введите корректный электронный Id.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="Review">Ссылка на обзор на YouTube</label>
+                                        <input type="text" class="form-control" id="Review" name="Review" placeholder="YouTube link" value="@game._Review">
+                                        <div class="invalid-feedback">
+                                            Пожалуйста введите корректную ссылку.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="ShortDescription">Краткое описание</label>
+                                <input class="form-control" id="ShortDescription" name="ShortDescription" placeholder="" required="" value="@game._ShortDescription" maxlength="115">
+                                <div class="invalid-feedback">
+                                    Это поле обязательно для заполнения.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="FullDescription">Полное описание</label>
+                                <textarea class="form-control" rows="4" id="FullDescription" name="FullDescription" placeholder="" required="">@game._FullDescription</textarea>
+                                <div class="invalid-feedback">
+                                    Это поле обязательно для заполнения.
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="Price">Цена</label>
+                                        <input type="text" class="form-control" id="Price" name="Price" placeholder="" required="" value="@game._Price">
+                                        <div class="invalid-feedback">
+                                            Это поле обязательно для заполнения.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="DateOfRelease">Дата релиза</label>
+                                        @{ var stringDate = game._DateOfRelease.Year + "." + game._DateOfRelease.Month + "." + game._DateOfRelease.Day; }
+                                        <input type="text" class="form-control" id="DateOfRelease" name="DateOfRelease" placeholder="" required="" value="@stringDate">
+                                        <div class="invalid-feedback">
+                                            Это поле обязательно для заполнения.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="Sale">Скидка (в процентах)</label>
+                                        <input type="text" class="form-control" id="Sale" name="Sale" placeholder="" required="" value="@game._Sale">
+                                        <div class="invalid-feedback">
+                                            Это поле обязательно для заполнения.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="Genre">Жанр</label>
+                                        <input type="text" class="form-control" id="Genre" name="Genre" placeholder="" required="" value="@game._Genre">
+                                        <div class="invalid-feedback">
+                                            Это поле обязательно для заполнения.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="Image">Текущее изображение игры</label>
+                            </div>
+
+                            <div class="mb-3">
+                                <img id="Image" name="Image" src="/Content/Images/Default.png" alt="" style="height: 30%; width: 30%;"/>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="file" id="imgInput" name="imgInput"/>
+                                <input type="text" id="ImagePath" name="ImagePath" value="" style="display: none;"/>
+                            </div>
+
+                            <script>
+                                function readURL(input) {
+
+                                    if (input.files && input.files[0]) {
+                                        var reader = new FileReader();
+
+                                        reader.onload = function(e) {
+                                            $('#Image').attr('src', e.target.result);
+                                            $('#ImagePath').attr('value', e.target.result);
+                                        };
+
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                }
+
+                                $("#imgInput").change(function() {
+                                    readURL(this);
+                                });
+                            </script>
+
+                            <hr class="mb-4">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="Check">Изменить</button>
+                        </div>
+                    </div>
+                </form>
+            </main>
+        }
+    </div>
+</div>

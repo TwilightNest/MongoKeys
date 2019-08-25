@@ -1,0 +1,42 @@
+﻿<script>
+    document.addEventListener('DOMContentLoaded',
+        function() {
+            var pass1 = document.querySelector('#Password'),
+                pass2 = document.querySelector('#ConfirmPassword');
+            pass1.addEventListener('input',
+                function() {
+                    this.value != pass2.value
+                        ? pass2.setCustomValidity('Пароли должны совпадать')
+                        : pass2.setCustomValidity('');
+                });
+            pass2.addEventListener('input',
+                function(e) {
+                    this.value != pass1.value
+                        ? this.setCustomValidity('Пароли должны совпадать')
+                        : this.setCustomValidity('');
+                });
+        })
+</script>
+
+<form style="margin: auto; margin-bottom: 330px; margin-top: 300px; max-width: 330px; padding: 15px; width: 100%;" method="post" action="Register">
+    <h1 class="h3 mb-3 font-weight-normal">Форма регистрации</h1>
+
+    <label for="Login" class="sr-only">Имя пользователя</label>
+    <input id="Login" name="Login" class="form-control" placeholder="Login" required="" autofocus="">
+
+    <label for="Email" class="sr-only">Электронная почта</label>
+    <input type="email" id="Email" name="Email" class="form-control" placeholder="Email address" required="">
+
+    <label for="Password" class="sr-only">Пароль</label>
+    <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required="">
+
+    <label for="ConfirmPassword" class="sr-only">Повторите пароль</label>
+    <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" placeholder="Confirm password" required="">
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Запомнить меня
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="Check">Зарегистрироваться</button>
+</form>

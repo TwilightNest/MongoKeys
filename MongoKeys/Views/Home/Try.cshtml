@@ -1,0 +1,169 @@
+﻿<div class="container">
+
+    <section class="jumbotron text-center" style="margin-top: 56px;">
+        <div class="container">
+            <h1 class="jumbotron-heading">Испытай удачу!</h1>
+            <p class="lead text-muted">На этой странице вы можете испытать удачу. Заплатите всего 3$ и получите шанс выйграть игру которая стоит в несколько раз дороже.</p>
+        </div>
+    </section>
+
+
+    <form action="RandomGame" method="post" class="d-flex justify-content-sm-center" style="margin-bottom: 10%; margin-left: 10%; margin-right: 10%;">
+        <div class="d-flex justify-content-lg-center" style="width: 100%">
+            <div style="width: 100%">
+                <h4 class="mb-3" align="center">Заполните форму</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="FirstName">Имя</label>
+                        <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="LastName">Фамилия</label>
+                        <input type="text" class="form-control" id="LastName" name="LastName" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                </div>
+
+                @if (ViewBag.User != null)
+                {
+                    <div class="mb-3">
+                        <label for="UserName">Имя пользователя</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Никнейм(очень важно, не ошибитесь с написанием)" required="" value="@ViewBag.User._Login">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Это поле обязательно для заполнения.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Email">Электронная почта</label>
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="you@example.com" value="@ViewBag.User._Email">
+                        <div class="invalid-feedback">
+                            Пожалуйста введите корректный электронный адрес.
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="mb-3">
+                        <label for="UserName">Имя пользователя</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                            </div>
+                            <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Никнейм(очень важно, не ошибитесь с написанием)" required="">
+                            <div class="invalid-feedback" style="width: 100%;">
+                                Это поле обязательно для заполнения.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Email">Электронная почта</label>
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="you@example.com">
+                        <div class="invalid-feedback">
+                            Пожалуйста введите корректный электронный адрес.
+                        </div>
+                    </div>
+                }
+
+                <div class="mb-3">
+                    <label for="Address">Адрес</label>
+                    <input type="text" class="form-control" id="Address" name="Address" placeholder="Улица, дом, квартира" required="">
+                    <div class="invalid-feedback">
+                        Пожалуйста введите корректный адрес.
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 mb-3">
+                        <label for="Country">Страна</label>
+                        <select class="custom-select d-block w-100" id="Country" name="Country" required="">
+                            <option value="">Выберите...</option>
+                            <option>Беларусь</option>
+                            <option>Россия</option>
+                            <option>Украина</option>
+                            <option>Казахстан</option>
+                            <option>США</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-3">
+                        <label for="ZipCode">Zip код</label>
+                        <input type="text" class="form-control" id="ZipCode" name="ZipCode" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="save-info">
+                    <label class="custom-control-label" for="save-info">Сохранить информацию для следующих покупок</label>
+                </div>
+                <hr class="mb-4">
+
+                <h4 class="mb-3">Способ оплаты</h4>
+
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="CreditCard" name="CreditCard" type="radio" class="custom-control-input" checked="" required="">
+                        <label class="custom-control-label" for="CreditCard">Банковская карта</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="OwnerName">Владелец карты</label>
+                        <input type="text" class="form-control" id="OwnerName" name="OwnerName" placeholder="" required="">
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="CardNumber">Номер банковской карты</label>
+                        <input type="text" class="form-control" id="CardNumber" name="CardNumber" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="CardExpiration">Срок действия</label>
+                        <input type="text" class="form-control" id="CardExpiration" name="CardExpiration" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="CardCvv">CVV код</label>
+                        <input type="text" class="form-control" id="CardCvv" name="CardCvv" placeholder="" required="">
+                        <div class="invalid-feedback">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Оплатить (3$)</button>
+            </div>
+        </div>
+    </form>
+    }
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+<script src="form-validation.js"></script>

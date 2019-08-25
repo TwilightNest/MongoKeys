@@ -1,0 +1,136 @@
+﻿@using MongoKeys.Models
+@using (var context = new ApplicationContext())
+{
+    var currentUser = context.Users.FirstOrDefault(u => u._Login == User.Identity.Name);
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand mr-auto mr-lg-0" href="#">Offcanvas navbar</a>
+    </nav>
+
+    <div class="nav-scroller bg-white shadow-sm">
+        <nav class="nav nav-underline">
+            <a class="nav-link" href="/User/Index/@currentUser._Id">Профиль</a>
+            <a class="nav-link active" href="/User/Settings">Настройки</a>
+            <a class="nav-link" href="/User/LogOff">Выход</a>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded',
+            function() {
+                var pass1 = document.querySelector('#Password'),
+                    pass2 = document.querySelector('#ConfirmPassword');
+                pass1.addEventListener('input',
+                    function() {
+                        this.value != pass2.value
+                            ? pass2.setCustomValidity('Пароли должны совпадать')
+                            : pass2.setCustomValidity('');
+                    });
+                pass2.addEventListener('input',
+                    function(e) {
+                        this.value != pass1.value
+                            ? this.setCustomValidity('Пароли должны совпадать')
+                            : this.setCustomValidity('');
+                    });
+            })
+    </script>
+
+    <form action="AddcurrentUser" method="post" class="d-flex justify-content-sm-center" style="margin-left: 30%;margin-right: 30%;margin-top: 3%; margin-bottom: 3%;">
+        <div class="d-flex justify-content-lg-center" style="width: 100%">
+            <div style="width: 100%">
+                <h4 class="mb-3" align="center">Настройки</h4>
+                <input id="Id" name="Id" value="@currentUser._Id" style="display: none">
+                <div class="mb-3">
+                    <label for="Login">Имя пользователя</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" class="form-control" id="Login" name="Login" placeholder="Никнейм(будет использоватся для входа в аккаунт)" required="" value="@currentUser._Login">
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Это поле обязательно для заполнения.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Email">Электронная почта</label>
+                    <input type="email" class="form-control" id="Email" name="Email" placeholder="you@example.com" value="@currentUser._Email">
+                    <div class="invalid-feedback">
+                        Пожалуйста введите корректный электронный адрес.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Password">Новый пароль</label>
+                    <input type="text" class="form-control" id="Password" name="Password" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Это поле обязательно для заполнения.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ConfirmPassword">Повторите пароль</label>
+                    <input type="text" class="form-control" id="ConfirmPassword" name="ConfirmPassword" placeholder="" required="">
+                    <div class="invalid-feedback">
+                        Это поле обязательно для заполнения.
+                    </div>
+                </div>
+
+                <script>
+                    function ChangeState() {
+                        var checkbox = document.getElementById('IsAdmin');
+                        if (checkbox.checked) {
+                            checkbox.value = true;
+                        } else {
+                            checkbox.value = false;
+                        }
+                    }
+                </script>
+
+
+                <div class="mb-3">
+                    <label for="Image">Текущее изображение профиля</label>
+                </div>
+
+                <div class="mb-3">
+                    <img id="Image" name="Image" src="/Content/Avatars/Default.png" alt="" style="height: 30%; width: 30%;"/>
+                </div>
+
+                <div class="mb-3">
+                    <input type="file" id="imgInput" name="imgInput"/>
+                    <input type="text" id="ImagePath" name="ImagePath" value="" style="display: none;"/>
+                </div>
+
+                <script>
+                    function readURL(input) {
+
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                $('#Image').attr('src', e.target.result);
+                                $('#ImagePath').attr('value', e.target.result);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+
+                    $("#imgInput").change(function() {
+                        readURL(this);
+                    });
+                </script>
+
+                <hr class="mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="Check">Изменить</button>
+            </div>
+        </div>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery ||
+            document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="offcanvas.js"></script>
+}
